@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editor de BagLists</title>
+    <link rel="stylesheet" href="baglistedition.css">
+</head>
+<body>
+    <!-- Panel lateral deslizante -->
+    <div id="editionPanel" class="edition-panel">
+        <div class="panel-header">
+            <h2>Editor de BagLists</h2>
+            <button class="close-panel" id="closePanel">&times;</button>
+        </div>
+
+        <div class="panel-content">
+            <!-- Sección Mis BagLists -->
+            <section class="baglist-section">
+                <div class="section-header">
+                    <h3>Mis BagLists</h3>
+                    <button class="add-btn" id="addBagList">+</button>
+                </div>
+                
+                <div class="baglist-table">
+                    {% for baglist in baglists %}
+                    <div class="baglist-row">
+                        <span class="baglist-name">{{ baglist.name }}</span>
+                        <button class="edit-btn" data-id="{{ baglist.id }}">Editar</button>
+                    </div>
+                    {% empty %}
+                        <p style="padding: 15px; color:#666;">Todavía no tienes ninguna BagList</p>
+                    {% endfor %}
+                </div>
+            </section>
+
+            <!-- Sección Edición de BagList -->
+            <section class="baglist-edit-section" id="baglistEditSection">
+                <div class="section-header">
+                    <h4>Editando: <span id="editingBagListName">BagList 1</span></h4>
+                </div>
+                
+                <div class="edit-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Nombre</label>
+                            <input type="text" id="baglistName" value="BagList 1">
+                            <button class="create-item-btn">Crear Item</button>
+                        </div>
+                        <div class="form-group visibility">
+                            <label>Etiqueta 1</label>
+                            <div class="visibility-options">
+                                <span>Visibilidad pública</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tbaglist-section">
+                        <label>tBagList 1</label>
+                        <input type="text" value="Item 1" class="tbaglist-input">
+                        <button class="add-item-btn">+ Agregar Item</button>
+                    </div>
+                    
+                    <button class="save-baglist-btn">Guardar Nueva BagList</button>
+                </div>
+            </section>
+
+            <!-- Sección Mis Items -->
+            <section class="items-section">
+                <div class="section-header">
+                    <h3>Mis Items</h3>
+                </div>
+                
+                <div class="items-container">
+                    <!-- Item 1 -->
+                    <div class="item-form">
+                        <div class="item-row">
+                            <input type="text" placeholder="Nombre" value="Item 1" class="item-name">
+                            <button class="link-btn">Link Url</button>
+                            <button class="link-btn">Link Video</button>
+                            <button class="link-btn">Link Ig</button>
+                        </div>
+                        <div class="item-row">
+                            <button class="link-btn image-btn">Link Imagen</button>
+                            <input type="text" placeholder="Descripción" class="item-description">
+                        </div>
+                    </div>
+
+                    <!-- Item 2 -->
+                    <div class="item-form">
+                        <div class="item-row">
+                            <input type="text" placeholder="Nombre" value="Item 2" class="item-name">
+                            <button class="link-btn">Link Url</button>
+                            <button class="link-btn">Link Video</button>
+                            <button class="link-btn">Link Ig</button>
+                        </div>
+                        <div class="item-row">
+                            <button class="link-btn image-btn">Link Imagen</button>
+                            <input type="text" placeholder="Descripción" class="item-description">
+                        </div>
+                    </div>
+
+                    <!-- Item 3 -->
+                    <div class="item-form">
+                        <div class="item-row">
+                            <input type="text" placeholder="Nombre" value="Item 3" class="item-name">
+                            <button class="link-btn">Link Url</button>
+                            <button class="link-btn">Link Video</button>
+                            <button class="link-btn">Link Ig</button>
+                        </div>
+                        <div class="item-row">
+                            <button class="link-btn image-btn">Link Imagen</button>
+                            <input type="text" placeholder="Descripción" class="item-description">
+                        </div>
+                    </div>
+
+                    <!-- Item 4 -->
+                    <div class="item-form">
+                        <div class="item-row">
+                            <input type="text" placeholder="Nombre" value="Item 4" class="item-name">
+                            <button class="link-btn">Link Url</button>
+                            <button class="link-btn">Link Video</button>
+                            <button class="link-btn">Link Ig</button>
+                        </div>
+                        <div class="item-row">
+                            <button class="link-btn image-btn">Link Imagen</button>
+                            <input type="text" placeholder="Descripción" class="item-description">
+                        </div>
+                    </div>
+
+                    <!-- Item 5 -->
+                    <div class="item-form">
+                        <div class="item-row">
+                            <input type="text" placeholder="Nombre" value="Item 5" class="item-name">
+                            <button class="link-btn">Link Url</button>
+                            <button class="link-btn">Link Video</button>
+                            <button class="link-btn">Link Ig</button>
+                        </div>
+                        <div class="item-row">
+                            <button class="link-btn image-btn">Link Imagen</button>
+                            <input type="text" placeholder="Descripción" class="item-description">
+                        </div>
+                    </div>
+
+                    <!-- Item 6 -->
+                    <div class="item-form">
+                        <div class="item-row">
+                            <input type="text" placeholder="Nombre" value="Item 6" class="item-name">
+                            <input type="text" placeholder="Link Url" value="Item 7" class="item-name">
+                            <input type="text" placeholder="Link Video" value="Item 8" class="item-name">
+                            <input type="text" placeholder="Link Ig" value="Item 9" class="item-name">
+                        </div>
+                        <div class="item-row">
+                            <button class="link-btn image-btn">Link Imagen</button>
+                            <input type="text" placeholder="Descripción" class="item-description">
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <button id="openPanel" class="open-panel-btn">Editar BagList</button>
+
+    <script>
+        //JavaScript básico para mostrar/ocultar panel
+        document.getElementById('openPanel').addEventListener('click', function() {
+            document.getElementById('editionPanel').classList.add('active');
+        });
+
+        document.getElementById('closePanel').addEventListener('click', function() {
+            document.getElementById('editionPanel').classList.remove('active');
+        });
+
+        // Simular edición de BagList
+        document.querySelectorAll('.edit-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const baglistName = this.previousElementSibling.textContent;
+                document.getElementById('editingBagListName').textContent = baglistName;
+                document.getElementById('baglistName').value = baglistName;
+            });
+        });
+    </script>
+</body>
+</html>

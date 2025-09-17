@@ -5,12 +5,11 @@
     <meta charset="UTF-8">
     <title>{{ baglist.name }}</title>
     <link rel="stylesheet" href="{% static 'app/css/baglist.css' %}">
+    <link rel="stylesheet" href="{% static 'app/css/baglistedition.css' %}">
 </head>
 <body>
     <div class="container">
-        <!-- Panel lateral -->
         <aside class="sidebar">
-            <!-- Aquí irá contenido futuro -->
             <h2>Panel Lateral</h2>
         </aside>
 
@@ -25,6 +24,7 @@
             <div class="user-info">
                 <p>@{{ baglist.user.username }}</p>
                 <p>Última actualización: {{ baglist.updated_at|date:"d-m-Y || H:i" }}</p>
+                <button id="openPanel" class="edit-panel-btn2">Editar</button>
             </div>
 
             <!-- Bloque principal -->
@@ -121,6 +121,14 @@
             setTimeout(() => el.textContent = original, 1000);
         });
     }
+    </script>
+    {% include 'core/baglist_edition.html' %}
+
+    <!-- JavaScript para el panel -->
+    <script>
+        document.getElementById('openPanel').addEventListener('click', function() {
+        document.getElementById('editionPanel').classList.add('active');
+        });
     </script>
 </body>
 </html>
