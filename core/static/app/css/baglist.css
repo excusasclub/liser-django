@@ -1,0 +1,221 @@
+/* ===== General ===== */
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    background: #ffffff;
+    color: #222;
+    font-size: 14px;
+}
+
+/* ===== Layout principal ===== */
+.container {
+    display: flex;
+    gap: 20px;
+}
+
+/* Panel lateral */
+.sidebar {
+    width: 200px;
+    background: #f0f0f0;
+    border-radius: 10px;
+    padding: 15px;
+}
+
+/* Contenido principal */
+.main-content {
+    flex: 1;
+}
+
+/* ===== Header ===== */
+.header {
+    background: #f0f0f0;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+/* ===== Info usuario ===== */
+.user-info {
+    margin-bottom: 20px;
+    font-size: 13px;
+    color: #666;
+}
+
+/* ===== Bloque principal ===== */
+.baglist-block {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 25px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+}
+
+.baglist-block h2 {
+    margin-top: 0;
+}
+
+/* ===== Tags ===== */
+.tags {
+    display: flex;
+    gap: 6px;
+    margin: 12px 0;
+}
+
+.tag {
+    background: #315C95;
+    color: #fff;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+}
+
+/* ===== Botón favorito ===== */
+.fav-btn {
+    border: none;
+    background: #ffd54a;
+    border-radius: 8px;
+    padding: 6px 12px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* ===== Sublist ===== */
+.sublist-block {
+    background: #315c9560;
+    border-radius: 12px;
+    padding: 15px;
+    margin: 20px 0;
+    max-width: 100%;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+}
+
+.sublist-block h3 {
+    margin-top: 0;
+    margin-bottom: 12px;
+    text-align: center;
+}
+
+/* ===== Tabla Compacta ===== */
+.items-table {
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    font-size: 13px;
+}
+
+/* Cabecera */
+.items-header {
+    display: grid;
+    grid-template-columns: 1fr 60px 60px 60px 100px; /* Producto + Link + Video + Instagram + Código */
+    align-items: center;
+    padding: 6px 10px;
+    background: #f5f5f5;
+    font-weight: 600;
+    border-bottom: 1px solid #eee;
+}
+
+.items-header > div:not(:first-child) {
+    text-align: center;
+}
+
+/* Filas */
+.item-row {
+    display: grid;
+    grid-template-columns: 1fr 60px 60px 60px 100px;
+    align-items: start;
+    padding: 6px 10px;
+    background: #fff;
+    border-bottom: 1px solid #eee;
+    transition: background 0.2s;
+}
+
+.item-row:hover {
+    background: #fafafa;
+}
+
+/* Columna Producto */
+.item-info {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.item-info img,
+.placeholder {
+    width: 40px;
+    height: 40px;
+    border-radius: 6px;
+    object-fit: cover;
+    background: #ddd;
+}
+
+.item-text strong {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 2px;
+}
+
+.item-text p {
+    margin: 0;
+    font-size: 11px;
+    color: #555;
+}
+
+/* Iconos */
+.item-link,
+.item-video,
+.item-instagram {
+    display: flex;
+    align-items: start;
+    justify-content: center;
+}
+
+.item-link img,
+.item-video img,
+.item-instagram img {
+    width: 20px;
+    height: 20px;
+}
+
+.item-link a,
+.item-video a,
+.item-instagram a {
+    text-decoration: none;
+    color: #315C95;
+}
+
+.item-link a:hover,
+.item-video a:hover,
+.item-instagram a:hover {
+    color: #f4c949;
+}
+
+/* Columna Código (clicable) */
+.item-code {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #315C95;
+}
+
+.item-code:hover {
+    color: #f4c949;
+    text-decoration: underline;
+}
+
+/* Mensaje vacío */
+.empty-msg {
+    text-align: center;
+    font-size: 12px;
+    color: #666;
+    margin-top: 6px;
+}

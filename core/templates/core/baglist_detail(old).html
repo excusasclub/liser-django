@@ -1,0 +1,97 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ baglist.name }}</title>
+    <link rel="stylesheet" href="{% static 'app/css/baglist.css' %}">
+</head>
+<body>
+    <!-- Cabecera -->
+    <header class="header">
+        <h1>Pedro Corchuelo - {{ baglist.name }}</h1>
+    </header>
+
+    <!-- Info usuario -->
+    <div class="user-info">
+        <p>@{{ baglist.user.username }}</p>
+        <p>Última actualización: {{ baglist.updated_at|date:"d-m-Y || H:i" }}</p>
+    </div>
+
+    <!-- Bloque principal -->
+    <section class="baglist-block">
+        <h2>{{ baglist.name }}</h2>
+        <p>{{ baglist.description|truncatechars:300 }}</p>
+        <div class="tags">
+            <span class="tag">Tag1</span>
+            <span class="tag">Tag2</span>
+            <span class="tag">Tag3</span>
+        </div>
+        <button class="fav-btn">⭐️</button>
+    </section>
+
+    <!-- Sublistas -->
+    {% for sublist in baglist.tbaglists.all %}
+        <section class="sublist-block">
+            <h3>{{ sublist.name }}</h3>
+
+            <div class="items-table">
+                <!-- Cabecera -->
+                <div class="items-header">
+                    <div>Producto</div>
+                    <div>Link</div>
+                    <div>Video</div>
+                    <div>Instagram</div>
+                </div>
+
+                <!-- Items -->
+                {% for item_relation in sublist.tbaglist_items.all %}
+                    <div class="item-row">
+                        <!-- Imagen + nombre + descripción -->
+                        <div class="item-info">
+                            {% if item_relation.item.image_url %}
+                                <img src="{{ item_relation.item.image_url }}" alt="{{ item_relation.item.name }}">
+                            {% else %}
+                                <div class="placeholder"></div>
+                            {% endif %}
+                            <div class="item-text">
+                                <strong>{{ item_relation.item.name }}</strong>
+                                <p>{{ item_relation.item.micro_description|truncatechars:120 }}</p>
+                            </div>
+                        </div>
+
+                        <!-- Link -->
+                        <div class="item-link">
+                            {% if item_relation.item.link_url %}
+                                <a href="{{ item_relation.item.link_url }}" target="_blank">
+                                    <img src="https://cdn-icons-png.flaticon.com/128/10276/10276957.png" alt="Ver Link">
+                                </a>
+                            {% endif %}
+                        </div>
+
+                        <!-- Video -->
+                        <div class="item-video">
+                            {% if item_relation.item.video_url %}
+                               <a href="{{ item_relation.item.video_url }}" target="_blank">
+                                   <img src="https://cdn-icons-png.flaticon.com/128/1384/1384060.png" alt="Ver video">
+                               </a>
+                            {% endif %}
+                        </div>
+
+                        <!-- Instagram -->
+                        <div class="item-instagram">
+                            {% if item_relation.item.video_url %}
+                               <a href="{{ item_relation.item.video_url }}" target="_blank">
+                                   <img src="https://cdn-icons-png.flaticon.com/128/2111/2111463.png" alt="Ver Post">
+                               </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% empty %}
+                    <p class="empty-msg">No hay items en esta sublista</p>
+                {% endfor %}
+            </div>
+        </section>
+    {% endfor %}
+</body>
+</html>
