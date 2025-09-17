@@ -112,5 +112,3 @@ Este proyecto está en desarrollo activo. Las contribuciones son bienvenidas.
 Este proyecto está bajo desarrollo privado.
 
 ---
-
-**Desarrollado para la comunidad de creadores de contenido**
