@@ -4,172 +4,112 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editor de BagLists</title>
-    <link rel="stylesheet" href="baglistedition.css">
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+<body class="bg-[rgba(49,92,149,0.15)] font-sans">
+
     <!-- Panel lateral deslizante -->
-    <div id="editionPanel" class="edition-panel">
-        <div class="panel-header">
-            <h2>Editor de BagLists</h2>
-            <button class="close-panel" id="closePanel">&times;</button>
+    <div id="editionPanel" 
+         class="fixed top-0 right-[-680px] w-[680px] h-screen bg-white shadow-lg transition-[right] duration-300 ease-in-out overflow-y-auto z-[1000]">
+
+        <!-- Cabecera -->
+        <div class="sticky top-0 z-10 flex justify-between items-center p-5 bg-gray-100 border-b border-gray-200">
+            <h2 class="text-xl font-semibold text-gray-800">Editor de BagLists</h2>
+            <button id="closePanel" class="w-8 h-8 flex items-center justify-center text-gray-600 text-2xl rounded-md hover:bg-gray-200 transition">×</button>
         </div>
 
-        <div class="panel-content">
+        <!-- Contenido del panel -->
+        <div class="p-0">
+
             <!-- Sección Mis BagLists -->
-            <section class="baglist-section">
-                <div class="section-header">
-                    <h3>Mis BagLists</h3>
-                    <button class="add-btn" id="addBagList">+</button>
+            <section class="mb-6">
+                <div class="flex justify-between items-center px-5 py-3 border-b border-gray-200">
+                    <h3 class="text-blue-800 font-semibold text-lg">Mis BagLists</h3>
+                    <button id="addBagList" class="w-8 h-8 flex items-center justify-center bg-[#315C95] text-white rounded-md font-bold text-lg hover:bg-[#2a4f82] transition">+</button>
                 </div>
                 
-                <div class="baglist-table">
+                <div class="px-5 py-2">
                     {% for baglist in baglists %}
-                    <div class="baglist-row">
-                        <span class="baglist-name">{{ baglist.name }}</span>
-                        <button class="edit-btn" data-id="{{ baglist.id }}">Editar</button>
-                    </div>
+                        <div class="flex justify-between items-center bg-gray-100 rounded-lg p-3 mb-2 hover:bg-gray-200 transition">
+                            <span class="text-gray-800 font-medium">{{ baglist.name }}</span>
+                            <button class="edit-btn px-3 py-1 bg-[#315C95] text-white rounded-md text-sm font-medium hover:bg-[#2a4f82] transition" data-id="{{ baglist.id }}">Editar</button>
+                        </div>
                     {% empty %}
-                        <p style="padding: 15px; color:#666;">Todavía no tienes ninguna BagList</p>
+                        <p class="p-4 text-gray-500">Todavía no tienes ninguna BagList</p>
                     {% endfor %}
                 </div>
             </section>
 
             <!-- Sección Edición de BagList -->
-            <section class="baglist-edit-section" id="baglistEditSection">
-                <div class="section-header">
-                    <h4>Editando: <span id="editingBagListName">BagList 1</span></h4>
+            <section id="baglistEditSection" class="mb-6 bg-[rgba(49,92,149,0.38)] p-5 rounded-lg">
+                <div class="mb-4">
+                    <h4 class="text-blue-800 font-semibold">Editando: <span id="editingBagListName">BagList 1</span></h4>
                 </div>
-                
-                <div class="edit-form">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Nombre</label>
-                            <input type="text" id="baglistName" value="BagList 1">
-                            <button class="create-item-btn">Crear Item</button>
+
+                <div class="space-y-4">
+                    <!-- Formulario principal -->
+                    <div class="flex gap-4 flex-wrap">
+                        <div class="flex-1">
+                            <label class="block mb-1 text-gray-800 font-medium text-sm">Nombre</label>
+                            <input id="baglistName" type="text" value="BagList 1" class="w-full p-2 border border-gray-300 rounded-md focus:border-[#315C95] focus:outline-none text-sm">
+                            <button class="mt-2 px-3 py-2 bg-[#FFD54A] hover:bg-[#FFCD2E] text-gray-800 rounded-md font-medium text-sm transition">Crear Item</button>
                         </div>
-                        <div class="form-group visibility">
-                            <label>Etiqueta 1</label>
-                            <div class="visibility-options">
-                                <span>Visibilidad pública</span>
-                            </div>
+
+                        <div class="w-[150px]">
+                            <label class="block mb-1 text-gray-800 font-medium text-sm">Etiqueta 1</label>
+                            <div class="p-2 border border-gray-300 rounded-md bg-white text-gray-600 text-sm">Visibilidad pública</div>
                         </div>
                     </div>
-                    
-                    <div class="tbaglist-section">
-                        <label>tBagList 1</label>
-                        <input type="text" value="Item 1" class="tbaglist-input">
-                        <button class="add-item-btn">+ Agregar Item</button>
+
+                    <!-- tBagList -->
+                    <div class="space-y-2">
+                        <label class="block text-gray-800 font-medium text-sm">tBagList 1</label>
+                        <div class="flex gap-2 flex-wrap">
+                            <input type="text" value="Item 1" class="flex-1 p-2 border border-gray-300 rounded-md focus:border-[#315C95] focus:outline-none text-sm">
+                            <button class="px-3 py-2 bg-[#315C95] hover:bg-[#2a4f82] text-white rounded-md font-medium text-sm transition">+ Agregar Item</button>
+                        </div>
                     </div>
-                    
-                    <button class="save-baglist-btn">Guardar Nueva BagList</button>
+
+                    <!-- Guardar BagList -->
+                    <button class="w-full py-3 bg-[#315C95] hover:bg-[#2a4f82] text-white font-semibold rounded-lg transition">Guardar Nueva BagList</button>
                 </div>
             </section>
 
             <!-- Sección Mis Items -->
-            <section class="items-section">
-                <div class="section-header">
-                    <h3>Mis Items</h3>
+            <section class="mb-6 px-5">
+                <div class="flex justify-between items-center border-b border-gray-200 mb-3">
+                    <h3 class="text-blue-800 font-semibold text-lg">Mis Items</h3>
                 </div>
-                
-                <div class="items-container">
-                    <!-- Item 1 -->
-                    <div class="item-form">
-                        <div class="item-row">
-                            <input type="text" placeholder="Nombre" value="Item 1" class="item-name">
-                            <button class="link-btn">Link Url</button>
-                            <button class="link-btn">Link Video</button>
-                            <button class="link-btn">Link Ig</button>
-                        </div>
-                        <div class="item-row">
-                            <button class="link-btn image-btn">Link Imagen</button>
-                            <input type="text" placeholder="Descripción" class="item-description">
-                        </div>
-                    </div>
 
-                    <!-- Item 2 -->
-                    <div class="item-form">
-                        <div class="item-row">
-                            <input type="text" placeholder="Nombre" value="Item 2" class="item-name">
-                            <button class="link-btn">Link Url</button>
-                            <button class="link-btn">Link Video</button>
-                            <button class="link-btn">Link Ig</button>
+                <div class="space-y-4">
+                    {% for i in 1..6 %}
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4 space-y-2">
+                        <div class="flex gap-2 flex-wrap">
+                            <input type="text" placeholder="Nombre" value="Item {{ i }}" class="flex-1 p-2 border border-gray-300 rounded-md focus:border-[#315C95] focus:outline-none text-sm">
+                            <button class="px-2 py-1 bg-[#315C95] hover:bg-[#2a4f82] text-white rounded-md text-sm transition">Link Url</button>
+                            <button class="px-2 py-1 bg-[#315C95] hover:bg-[#2a4f82] text-white rounded-md text-sm transition">Link Video</button>
+                            <button class="px-2 py-1 bg-[#315C95] hover:bg-[#2a4f82] text-white rounded-md text-sm transition">Link Ig</button>
                         </div>
-                        <div class="item-row">
-                            <button class="link-btn image-btn">Link Imagen</button>
-                            <input type="text" placeholder="Descripción" class="item-description">
-                        </div>
-                    </div>
-
-                    <!-- Item 3 -->
-                    <div class="item-form">
-                        <div class="item-row">
-                            <input type="text" placeholder="Nombre" value="Item 3" class="item-name">
-                            <button class="link-btn">Link Url</button>
-                            <button class="link-btn">Link Video</button>
-                            <button class="link-btn">Link Ig</button>
-                        </div>
-                        <div class="item-row">
-                            <button class="link-btn image-btn">Link Imagen</button>
-                            <input type="text" placeholder="Descripción" class="item-description">
+                        <div class="flex gap-2 flex-wrap">
+                            <button class="px-2 py-1 bg-[#315C95] hover:bg-[#2a4f82] text-white rounded-md text-sm transition">Link Imagen</button>
+                            <input type="text" placeholder="Descripción" class="flex-1 p-2 border border-gray-300 rounded-md focus:border-[#315C95] focus:outline-none text-sm">
                         </div>
                     </div>
-
-                    <!-- Item 4 -->
-                    <div class="item-form">
-                        <div class="item-row">
-                            <input type="text" placeholder="Nombre" value="Item 4" class="item-name">
-                            <button class="link-btn">Link Url</button>
-                            <button class="link-btn">Link Video</button>
-                            <button class="link-btn">Link Ig</button>
-                        </div>
-                        <div class="item-row">
-                            <button class="link-btn image-btn">Link Imagen</button>
-                            <input type="text" placeholder="Descripción" class="item-description">
-                        </div>
-                    </div>
-
-                    <!-- Item 5 -->
-                    <div class="item-form">
-                        <div class="item-row">
-                            <input type="text" placeholder="Nombre" value="Item 5" class="item-name">
-                            <button class="link-btn">Link Url</button>
-                            <button class="link-btn">Link Video</button>
-                            <button class="link-btn">Link Ig</button>
-                        </div>
-                        <div class="item-row">
-                            <button class="link-btn image-btn">Link Imagen</button>
-                            <input type="text" placeholder="Descripción" class="item-description">
-                        </div>
-                    </div>
-
-                    <!-- Item 6 -->
-                    <div class="item-form">
-                        <div class="item-row">
-                            <input type="text" placeholder="Nombre" value="Item 6" class="item-name">
-                            <input type="text" placeholder="Link Url" value="Item 7" class="item-name">
-                            <input type="text" placeholder="Link Video" value="Item 8" class="item-name">
-                            <input type="text" placeholder="Link Ig" value="Item 9" class="item-name">
-                        </div>
-                        <div class="item-row">
-                            <button class="link-btn image-btn">Link Imagen</button>
-                            <input type="text" placeholder="Descripción" class="item-description">
-                        </div>
-                    </div>
+                    {% endfor %}
                 </div>
             </section>
         </div>
     </div>
 
-    <button id="openPanel" class="open-panel-btn">Editar BagList</button>
-
+    <!-- Scripts -->
     <script>
-        //JavaScript básico para mostrar/ocultar panel
-        document.getElementById('openPanel').addEventListener('click', function() {
-            document.getElementById('editionPanel').classList.add('active');
+        // Mostrar/ocultar panel
+        document.getElementById('openPanel').addEventListener('click', () => {
+            document.getElementById('editionPanel').classList.add('right-0');
         });
 
-        document.getElementById('closePanel').addEventListener('click', function() {
-            document.getElementById('editionPanel').classList.remove('active');
+        document.getElementById('closePanel').addEventListener('click', () => {
+            document.getElementById('editionPanel').classList.remove('right-0');
         });
 
         // Simular edición de BagList
